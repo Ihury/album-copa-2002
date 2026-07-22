@@ -1,0 +1,251 @@
+{
+  "competition": "FIFA World Cup",
+  "edition": "Korea · Japan",
+  "year": "2002",
+  "subtitle": "Selecione uma nação",
+  "stadium_background_url": "https://api.facom.ufu.br/assets/stadium_sketch.png",
+  "teams": [
+    {
+      "id": "team_bra",
+      "name": "Brasil",
+      "group": "Grupo C",
+      "crest_url": "https://api.facom.ufu.br/crests/brazil.png",
+      "victories": 5,
+      "title_years": ["1958", "1962", "1970", "1994", "2002"],
+      "final_result": "Campeão",
+      "matches_played": 12,
+      "primary_color": "#FFDF00",
+      "secondary_color": "#009C3B",
+      "description": "Única seleção pentacampeã mundial e presente em todas as edições. Em 2002 formou o trio ofensivo dos '3 R' (Ronaldo, Rivaldo e Ronaldinho).",
+      "coach": {
+        "id": "coach_bra",
+        "name": "Luiz Felipe Scolari",
+        "role": "Técnico Principal",
+        "photo_url": "https://api.facom.ufu.br/staff/scolari.png",
+        "profile": "Estrategista pragmático e motivador, 'Felipão' conduziu o Brasil ao penta com uma equipe combativa e ofensiva, apoiada na 'família Scolari'."
+      },
+      "players": [
+        {
+          "id": "player_ronaldo",
+          "name": "Ronaldo",
+          "position": "Centroavante",
+          "number": 9,
+          "photo_url": "https://api.facom.ufu.br/cards/ronaldo.png",
+          "biography": "O Fenômeno voltou de graves lesões para ser o artilheiro da Copa de 2002, com 8 gols, incluindo os dois da final contra a Alemanha.",
+          "goals": 8,
+          "matches": 7,
+          "assists": 0
+        },
+        {
+          "id": "player_rivaldo",
+          "name": "Rivaldo",
+          "position": "Meia-atacante",
+          "number": 10,
+          "photo_url": "https://api.facom.ufu.br/cards/rivaldo.png",
+          "biography": "Craque canhoto, decisivo em 2002 marcando em cada uma das primeiras partidas da campanha do penta.",
+          "goals": 5,
+          "matches": 7,
+          "assists": 2
+        },
+        {
+          "id": "player_ronaldinho",
+          "name": "Ronaldinho Gaúcho",
+          "position": "Meia",
+          "number": 11,
+          "photo_url": "https://api.facom.ufu.br/cards/ronaldinho.png",
+          "biography": "Autor do gol de falta sobre a Inglaterra nas quartas de final, símbolo da criatividade brasileira.",
+          "goals": 2,
+          "matches": 5,
+          "assists": 3
+        },
+        {
+          "id": "player_cafu",
+          "name": "Cafu",
+          "position": "Lateral-direito",
+          "number": 2,
+          "photo_url": "https://api.facom.ufu.br/cards/cafu.png",
+          "biography": "Capitão e primeiro jogador a disputar três finais de Copa do Mundo consecutivas (1994, 1998, 2002).",
+          "goals": 0,
+          "matches": 7,
+          "assists": 1
+        }
+      ]
+    },
+    {
+      "id": "team_ger",
+      "name": "Alemanha",
+      "group": "Grupo E",
+      "crest_url": "https://api.facom.ufu.br/crests/germany.png",
+      "victories": 3,
+      "title_years": ["1954", "1974", "1990"],
+      "final_result": "Vice-campeã",
+      "matches_played": 6,
+      "primary_color": "#FFFFFF",
+      "secondary_color": "#B71C1C",
+      "description": "Chegou à final apoiada na solidez defensiva e nas defesas decisivas do goleiro e capitão Oliver Kahn.",
+      "coach": {
+        "id": "coach_ger",
+        "name": "Rudi Völler",
+        "role": "Técnico Principal",
+        "photo_url": "https://api.facom.ufu.br/staff/voller.png",
+        "profile": "Ex-atacante campeão em 1990, assumiu a seleção em transição e a levou a uma final improvável com pragmatismo."
+      },
+      "players": [
+        {
+          "id": "player_kahn",
+          "name": "Oliver Kahn",
+          "position": "Goleiro",
+          "number": 1,
+          "photo_url": "https://api.facom.ufu.br/cards/kahn.png",
+          "biography": "Único goleiro a vencer o prêmio de melhor jogador de uma Copa do Mundo (Bola de Ouro 2002).",
+          "goals": 0,
+          "matches": 7,
+          "assists": 0
+        },
+        {
+          "id": "player_ballack",
+          "name": "Michael Ballack",
+          "position": "Meio-campista",
+          "number": 13,
+          "photo_url": "https://api.facom.ufu.br/cards/ballack.png",
+          "biography": "Marcou o gol da vitória na semifinal, mas foi suspenso e perdeu a final por acúmulo de cartões.",
+          "goals": 3,
+          "matches": 7,
+          "assists": 0
+        }
+      ]
+    },
+    {
+      "id": "team_tur",
+      "name": "Turquia",
+      "group": "Grupo C",
+      "crest_url": "https://api.facom.ufu.br/crests/turkey.png",
+      "victories": 0,
+      "title_years": [],
+      "final_result": "3º Lugar",
+      "matches_played": 7,
+      "primary_color": "#B71C1C",
+      "secondary_color": "#FFFFFF",
+      "description": "Melhor campanha de sua história, terminando em terceiro lugar com um futebol veloz e o artilheiro Hakan Şükür.",
+      "coach": {
+        "id": "coach_tur",
+        "name": "Şenol Güneş",
+        "role": "Técnico Principal",
+        "photo_url": "https://api.facom.ufu.br/staff/gunes.png",
+        "profile": "Comandou a geração de ouro turca a uma inédita e histórica terceira colocação mundial."
+      },
+      "players": [
+        {
+          "id": "player_sukur",
+          "name": "Hakan Şükür",
+          "position": "Centroavante",
+          "number": 9,
+          "photo_url": "https://api.facom.ufu.br/cards/sukur.png",
+          "biography": "Autor do gol mais rápido da história das Copas do Mundo: 11 segundos, na disputa de terceiro lugar.",
+          "goals": 1,
+          "matches": 7,
+          "assists": 1
+        }
+      ]
+    },
+    {
+      "id": "team_kor",
+      "name": "Coréia do Sul",
+      "group": "Grupo D",
+      "crest_url": "https://api.facom.ufu.br/crests/korea.png",
+      "victories": 0,
+      "title_years": [],
+      "final_result": "4º Lugar",
+      "matches_played": 7,
+      "primary_color": "#B71C1C",
+      "secondary_color": "#0D47A1",
+      "description": "Anfitriã surpreendente que alcançou a semifinal, embalada pela torcida dos 'Diabos Vermelhos' e pela intensidade física.",
+      "coach": {
+        "id": "coach_kor",
+        "name": "Guus Hiddink",
+        "role": "Técnico Principal",
+        "photo_url": "https://api.facom.ufu.br/staff/hiddink.png",
+        "profile": "Técnico holandês que revolucionou a preparação física da seleção e virou herói nacional na Coréia do Sul."
+      },
+      "players": [
+        {
+          "id": "player_parkjs",
+          "name": "Park Ji-sung",
+          "position": "Meio-campista",
+          "number": 21,
+          "photo_url": "https://api.facom.ufu.br/cards/park.png",
+          "biography": "Marcou o gol que eliminou Portugal na fase de grupos e projetou sua carreira ao futebol europeu.",
+          "goals": 1,
+          "matches": 7,
+          "assists": 0
+        }
+      ]
+    },
+    {
+      "id": "team_sen",
+      "name": "Senegal",
+      "group": "Grupo A",
+      "crest_url": "https://api.facom.ufu.br/crests/senegal.png",
+      "victories": 0,
+      "title_years": [],
+      "final_result": "Quartas de Final",
+      "matches_played": 5,
+      "primary_color": "#1B5E20",
+      "secondary_color": "#FFD700",
+      "description": "Estreante que chocou o mundo ao vencer a França, atual campeã, na abertura, chegando às quartas de final.",
+      "coach": {
+        "id": "coach_sen",
+        "name": "Bruno Metsu",
+        "role": "Técnico Principal",
+        "photo_url": "https://api.facom.ufu.br/staff/metsu.png",
+        "profile": "Comandante carismático que uniu o grupo senegalês e protagonizou uma das maiores zebras da história das Copas."
+      },
+      "players": [
+        {
+          "id": "player_diouf",
+          "name": "El Hadji Diouf",
+          "position": "Atacante",
+          "number": 11,
+          "photo_url": "https://api.facom.ufu.br/cards/diouf.png",
+          "biography": "Estrela da campanha senegalesa, eleito melhor jogador africano do ano em 2001 e 2002.",
+          "goals": 0,
+          "matches": 5,
+          "assists": 2
+        }
+      ]
+    },
+    {
+      "id": "team_esp",
+      "name": "Espanha",
+      "group": "Grupo B",
+      "crest_url": "https://api.facom.ufu.br/crests/spain.png",
+      "victories": 0,
+      "title_years": [],
+      "final_result": "Quartas de Final",
+      "matches_played": 5,
+      "primary_color": "#B71C1C",
+      "secondary_color": "#FFD700",
+      "description": "Fez 100% de aproveitamento na fase de grupos, mas caiu nas quartas para a anfitriã Coréia do Sul nos pênaltis.",
+      "coach": {
+        "id": "coach_esp",
+        "name": "José Antonio Camacho",
+        "role": "Técnico Principal",
+        "photo_url": "https://api.facom.ufu.br/staff/camacho.png",
+        "profile": "Ex-lateral do Real Madrid, dirigiu uma Espanha regular que esbarrou na arbitragem polêmica das quartas."
+      },
+      "players": [
+        {
+          "id": "player_raul",
+          "name": "Raúl",
+          "position": "Centroavante",
+          "number": 7,
+          "photo_url": "https://api.facom.ufu.br/cards/raul.png",
+          "biography": "Ídolo do Real Madrid e principal referência ofensiva da seleção espanhola no início dos anos 2000.",
+          "goals": 3,
+          "matches": 5,
+          "assists": 1
+        }
+      ]
+    }
+  ]
+}
