@@ -30,14 +30,18 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import android.app.Activity
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import br.ufu.pdm.copa2002.domain.model.Coach
@@ -109,6 +113,19 @@ private fun TeamContent(
     onPlayerClick: (String) -> Unit,
     onCoachClick: (String) -> Unit
 ) {
+    // RF03 — barra de status adaptativa: assume a cor oficial da seleção
+    // enquanto esta tela estiver visível e restaura ao sair.
+    val view = LocalView.current
+    if (!view.isInEditMode) {
+        val statusBarColor = parseHexColor(team.secondaryColor)
+        DisposableEffect(statusBarColor) {
+            val window = (view.context as Activity).window
+            val previous = window.statusBarColor
+            window.statusBarColor = statusBarColor.toArgb()
+            onDispose { window.statusBarColor = previous }
+        }
+    }
+
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(bottom = 24.dp),

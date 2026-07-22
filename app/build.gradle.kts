@@ -72,9 +72,27 @@ dependencies {
     // Imagens
     implementation(libs.coil.compose)
 
-    // Serialização JSON (fonte de dados mock) + Coroutines
+    // Persistência local (Room) — cache offline-first, processador via KSP
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+
+    // Serialização JSON (fonte de dados) + Coroutines
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.coroutines.android)
+
+    // Testes unitários (JVM)
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
+
+    // Testes instrumentados (device/emulador)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.androidx.room.testing)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.test.manifest)
 
     // Ferramentas de desenvolvimento
     debugImplementation(libs.androidx.ui.tooling)

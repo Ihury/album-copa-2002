@@ -1,6 +1,6 @@
 package br.ufu.pdm.copa2002.di
 
-import br.ufu.pdm.copa2002.data.repository.MockCompetitionRepository
+import br.ufu.pdm.copa2002.data.repository.RoomCompetitionRepository
 import br.ufu.pdm.copa2002.domain.repository.CompetitionRepository
 import dagger.Binds
 import dagger.Module
@@ -23,6 +23,6 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindCompetitionRepository(
-        impl: MockCompetitionRepository
+        impl: RoomCompetitionRepository
     ): CompetitionRepository
 }

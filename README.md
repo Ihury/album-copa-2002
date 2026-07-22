@@ -10,8 +10,10 @@ Aplicativo Android da disciplina de Programação para Dispositivos Móveis (FAC
 - **Navigation Compose** (Single Activity, rotas com argumentos)
 - **Coroutines + StateFlow** (fluxo unidirecional de dados)
 - **Hilt** (injeção de dependências, processador **KSP**)
+- **Room** (persistência local / cache offline-first, processador **KSP**)
 - **kotlinx.serialization** (parsing do JSON de dados)
 - **Coil** (carregamento de imagens)
+- **Testes**: JUnit 4 + MockK + coroutines-test (unitários) · Room in-memory + AndroidJUnit4 (instrumentados)
 
 ## Como abrir e rodar
 
@@ -29,19 +31,22 @@ Aplicativo Android da disciplina de Programação para Dispositivos Móveis (FAC
 > Se o build reclamar do SDK, crie `local.properties` na raiz com:
 > `sdk.dir=/caminho/para/Android/sdk`
 
-## Arquitetura (fonte de dados: mock-first)
+## Arquitetura (offline-first)
 
 O fluxo segue o diagrama da Fase 1:
 
 ```
-UI (Compose) → ViewModel (StateFlow) → Repository (Single Source of Truth) → DataSource
+UI (Compose) → ViewModel (StateFlow) → Repository (Single Source of Truth)
+                                          ├── Room (cache local reativo)  ← observado pela UI
+                                          └── fonte remota (refresh)      ← hoje o JSON local
 ```
 
-Nesta entrega, o `CompetitionRepository` é implementado por `MockCompetitionRepository`,
-que lê os dados de `app/src/main/assets/competition.json` (esquema JSON da Fase 1).
-Como a UI depende **apenas da interface** `CompetitionRepository`, trocar a fonte
-por **Firebase** ou **Retrofit** na próxima etapa exige mudar somente o binding em
-`di/RepositoryModule.kt` — nenhuma tela ou ViewModel muda.
+O `CompetitionRepository` é implementado por `RoomCompetitionRepository`: a UI
+**observa o cache local do Room** (`observeCompetition()`, reativo) e o ViewModel
+dispara `refresh()`, que lê a **fonte remota** e regrava o Room (Single Source of
+Truth). Hoje a "fonte remota" é `app/src/main/assets/competition.json`; para o
+RF06 basta trocá-la pelo Firestore — **nenhuma tela, ViewModel ou o Room mudam**
+(ver [`FIREBASE_SETUP.md`](FIREBASE_SETUP.md)).
 
 ## Estrutura de pacotes
 
@@ -49,15 +54,16 @@ por **Firebase** ou **Retrofit** na próxima etapa exige mudar somente o binding
 br.ufu.pdm.copa2002
 ├── AlbumApplication.kt        # @HiltAndroidApp
 ├── MainActivity.kt            # Single Activity + setContent
-├── di/                        # Módulos Hilt (DataModule, RepositoryModule)
+├── di/                        # Módulos Hilt (Data, Database, Repository)
 ├── domain/
 │   ├── model/                 # Entidades puras (Competition, Team, Coach, Player)
 │   └── repository/            # CompetitionRepository (interface)
 ├── data/
 │   ├── dto/                   # DTOs do JSON (@Serializable)
-│   ├── mapper/                # DTO → domínio
-│   ├── source/                # AssetCompetitionDataSource (lê o JSON)
-│   └── repository/            # MockCompetitionRepository
+│   ├── local/                 # Room: entities, DAO, AppDatabase, Converters
+│   ├── mapper/                # DTO → entidade → domínio
+│   ├── source/                # AssetCompetitionDataSource (fonte remota mock)
+│   └── repository/            # RoomCompetitionRepository (offline-first)
 └── ui/
     ├── theme/                 # Cores/tipografia (paleta da Fase 1)
     ├── navigation/            # Screen (rotas) + AppNavigation (NavHost)
@@ -75,15 +81,24 @@ br.ufu.pdm.copa2002
 |----|-----------|--------|
 | RF01 | Tela inicial da competição + lista de seleções | ✅ CompetitionScreen |
 | RF02 | Lista de seleções (brasão + títulos) | ✅ |
-| RF03 | Detalhes da equipe (comissão técnica + grid de jogadores + cor adaptativa) | ✅ TeamScreen |
+| RF03 | Detalhes da equipe (comissão técnica + grid + barra de status adaptativa) | ✅ TeamScreen |
 | RF04 | Perfil do atleta/treinador (figurinha) | ✅ PlayerDetailScreen / CoachDetailScreen |
 | RF05 | Giro 3D da figurinha (Card Flip no eixo Y) | ✅ FlipCard |
-| RF06 | Sincronização remota de dados | ⏳ mock local (próxima etapa: Firebase/Retrofit) |
+| RF06 | Sincronização remota de dados | ⏳ offline-first pronto; falta plugar o Firestore (ver FIREBASE_SETUP.md) |
+
+Requisitos não funcionais: RNF01 (Compose) · RNF02 (MVVM) · RNF03 (UDF/StateFlow) ·
+RNF04 (Git/GitHub) · **RNF05 (testabilidade)** ✅ testes unitários + instrumentados.
+
+## Testes
+
+```bash
+./gradlew testDebugUnitTest        # unitários (JVM): ViewModel + mappers
+./gradlew connectedDebugAndroidTest # instrumentados (device/emulador): DAO Room
+```
 
 ## Próximos passos sugeridos
 
-- **RF06**: implementar `FirebaseCompetitionRepository` **ou** `RetrofitCompetitionRepository`
-  e trocar o binding em `di/RepositoryModule.kt`.
-- **Persistência (Room)**: adicionar cache local como fonte da verdade (offline-first).
-- **Testes**: unitários das ViewModels (MockK + coroutines-test) e de UI (Compose Test).
-- **Barra de status adaptativa** por cor da seleção (RF03) e imagens reais das figurinhas.
+- **RF06**: plugar o Firestore como fonte remota — passo a passo em [`FIREBASE_SETUP.md`](FIREBASE_SETUP.md)
+  (depende de criar o projeto no Firebase + `google-services.json`).
+- **Imagens reais** das figurinhas/brasões (hoje o `AvatarImage` usa fallback com iniciais).
+- **Notificações** (ponto extra da 2ª entrega) e publicação (AAB).

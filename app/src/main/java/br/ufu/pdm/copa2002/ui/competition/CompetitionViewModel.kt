@@ -24,16 +24,31 @@ class CompetitionViewModel @Inject constructor(
     val query: StateFlow<String> = _query.asStateFlow()
 
     init {
-        load()
+        observeCache()
+        refresh()
     }
 
-    fun load() {
+    /** Offline-first: exibe o cache local assim que existir (reativo via Room). */
+    private fun observeCache() {
         viewModelScope.launch {
-            _uiState.value = UiState.Loading
+            repository.observeCompetition().collect { competition ->
+                if (competition != null) {
+                    _uiState.value = UiState.Success(competition)
+                }
+            }
+        }
+    }
+
+    /** Atualiza o cache local a partir da fonte remota. */
+    fun refresh() {
+        viewModelScope.launch {
             try {
-                _uiState.value = UiState.Success(repository.getCompetition())
+                repository.refresh()
             } catch (e: Exception) {
-                _uiState.value = UiState.Error(e.message ?: "Erro ao carregar a competição.")
+                // Só sinaliza erro se ainda não há dados em cache para exibir.
+                if (_uiState.value !is UiState.Success) {
+                    _uiState.value = UiState.Error(e.message ?: "Erro ao carregar a competição.")
+                }
             }
         }
     }
