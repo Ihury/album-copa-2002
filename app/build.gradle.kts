@@ -69,8 +69,9 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 
-    // Imagens
+    // Imagens (Coil + OkHttp para o ImageLoader com User-Agent customizado)
     implementation(libs.coil.compose)
+    implementation(libs.okhttp)
 
     // Persistência local (Room) — cache offline-first, processador via KSP
     implementation(libs.androidx.room.runtime)
